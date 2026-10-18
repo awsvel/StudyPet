@@ -1,0 +1,132 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Study Tracker</title>
+
+    <link rel="stylesheet" href="style.css">
+
+    <script src="tasks.js" defer></script>
+    <script src="timer.js" defer></script>
+    <script src="StudyStats.js" defer></script>
+</head>
+<body>
+    <header class="page-header">
+        <h1>Study Tracker</h1>
+        <p>Plan your work. Track your progress.</p>
+    </header>
+
+    <main class="container">
+        <section class="card">
+            <h2>Study Timer</h2>
+
+            <label for="sessionTask">Choose a task</label>
+            <select id="sessionTask">
+                <option value="">Add a task first</option>
+            </select>
+
+            <div id="timer" role="timer" aria-live="off">00:00:00</div>
+
+            <div class="button-row">
+                <button id="startPause" type="button">Start</button>
+                <button id="reset" type="button" class="secondary">Reset</button>
+                <button id="finishSession" type="button" class="success" disabled>
+                    Finish Session
+                </button>
+            </div>
+
+            <p id="sessionMessage" class="message" aria-live="polite"></p>
+        </section>
+
+        <section class="card">
+            <h2>Add a Task</h2>
+
+            <form id="taskForm">
+                <label for="className">Class name</label>
+                <input
+                    id="className"
+                    type="text"
+                    placeholder="Example: Computer Science I"
+                    maxlength="100"
+                    required
+                >
+
+                <label for="taskName">Task name</label>
+                <input
+                    id="taskName"
+                    type="text"
+                    placeholder="Example: Finish Lab 3"
+                    maxlength="150"
+                    required
+                >
+
+                <label for="taskNotes">Notes (optional)</label>
+                <textarea
+                    id="taskNotes"
+                    placeholder="What do you need to do?"
+                    maxlength="1000"
+                    rows="3"
+                ></textarea>
+
+                <button type="submit">Add Task</button>
+            </form>
+        </section>
+
+        <section class="card">
+            <h2>My Tasks</h2>
+            <p id="emptyMessage">No tasks yet. Add your first task above.</p>
+            <ul id="taskList" class="task-list"></ul>
+        </section>
+
+        <section class="card">
+            <h2>Study Session History</h2>
+            <p id="emptyHistory">No study sessions saved yet.</p>
+            <ul id="sessionHistory" class="history-list"></ul>
+        </section>
+
+        <section class="card" id="studyStats">
+            <div class="section-heading">
+                <div>
+                    <h2>Study Statistics</h2>
+                    <p>See how much time you've spent studying.</p>
+                </div>
+                <button id="refreshStats" type="button" class="secondary">
+                    Refresh
+                </button>
+            </div>
+
+            <div class="stats-grid">
+                <article class="stat-card">
+                    <h3>Today's Study Time</h3>
+                    <p id="todayTime">0 min</p>
+                </article>
+
+                <article class="stat-card">
+                    <h3>This Week's Study Time</h3>
+                    <p id="weekTime">0 min</p>
+                </article>
+
+                <article class="stat-card">
+                    <h3>Sessions Today</h3>
+                    <p id="todaySessions">0</p>
+                </article>
+
+                <article class="stat-card">
+                    <h3>Sessions This Week</h3>
+                    <p id="weekSessions">0</p>
+                </article>
+            </div>
+
+            <h3>Study Time by Class</h3>
+            <p id="emptyClassStats">Complete a session to see your statistics.</p>
+            <ul id="classStats" class="class-stats"></ul>
+        </section>
+    </main>
+
+    <footer>
+        <p>One session at a time.</p>
+    </footer>
+</body>
+</html>

@@ -193,7 +193,9 @@ function finishSession() {
     sessionMessage.textContent =
         `Session saved! You studied ${formatTime(session.duration)}.`;
 
-    window.dispatchEvent(new Event("studySessionsUpdated"));
+    window.dispatchEvent(
+        new CustomEvent("studySessionsUpdated", { detail: { session } })
+    );
 }
 
 function renderSessionHistory() {

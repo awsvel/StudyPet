@@ -6,6 +6,7 @@ const taskForm = document.getElementById("taskForm");
 const classNameInput = document.getElementById("className");
 const taskNameInput = document.getElementById("taskName");
 const taskNotesInput = document.getElementById("taskNotes");
+const taskDueDateInput = document.getElementById("taskDueDate");
 const taskList = document.getElementById("taskList");
 const emptyMessage = document.getElementById("emptyMessage");
 const sessionTaskSelect = document.getElementById("sessionTask");
@@ -82,6 +83,17 @@ function renderTasks() {
 
         item.append(title, classLabel);
 
+        if (task.dueDate) {
+            const dueDate = document.createElement("p");
+            dueDate.className = "task-meta";
+            dueDate.textContent = `Due: ${task.dueDate}`;
+            if (!task.completed && task.dueDate < getLocalDateKey(new Date())) {
+                dueDate.classList.add("overdue");
+                dueDate.textContent += " (overdue)";
+            }
+            item.appendChild(dueDate);
+        }
+
         if (task.notes) {
             const notes = document.createElement("p");
             notes.className = "task-notes";
@@ -117,6 +129,12 @@ function renderTasks() {
             }
 
             renderTasks();
+
+            if (task.completed) {
+                window.dispatchEvent(
+                    new CustomEvent("taskCompleted", { detail: { task } })
+                );
+            }
         });
 
         const deleteButton = document.createElement("button");
@@ -157,6 +175,7 @@ function renderTasks() {
     });
 
     populateTaskOptions();
+    window.dispatchEvent(new Event("tasksUpdated"));
 }
 
 taskForm.addEventListener("submit", event => {
@@ -176,6 +195,7 @@ taskForm.addEventListener("submit", event => {
         className,
         name,
         notes,
+        dueDate: taskDueDateInput.value,
         completed: false,
         createdAt: new Date().toISOString()
     };

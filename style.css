@@ -39,6 +39,100 @@ body {
     box-shadow: 0 3px 12px rgba(0, 0, 0, 0.07);
 }
 
+.pip-body {
+    margin: 0;
+    overflow-y: auto;
+    background: #f4f6fb;
+}
+
+.pip-body .page-header {
+    padding: 8px 12px;
+}
+
+.pip-body .page-header h1 {
+    font-size: 1.1rem;
+}
+
+.pip-body .page-header p {
+    display: none;
+}
+
+.pip-body .container {
+    width: calc(100% - 16px);
+    margin: 8px auto;
+}
+
+/* Compact pet card pinned to the top so pet, hunger and EXP stay visible. */
+.pip-body #pet {
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    display: grid;
+    grid-template-columns: 84px 1fr;
+    column-gap: 12px;
+    align-items: center;
+    padding: 10px 12px;
+}
+
+.pip-body #pet > * {
+    grid-column: 2;
+    margin: 0;
+}
+
+.pip-body #pet > h2,
+.pip-body #pet > #message:empty {
+    display: none;
+}
+
+.pip-body #pet > #pet-sprite {
+    grid-column: 1;
+    grid-row: 1 / span 5;
+    width: 84px;
+    height: 108px;
+}
+
+.pip-body #pet > .pet-extras,
+.pip-body #pet > label[for="exp-bar"],
+.pip-body #pet > #exp-bar,
+.pip-body #pet > .pet-actions,
+.pip-body #pet > #message {
+    grid-column: 1 / -1;
+}
+
+.pip-body #pet label {
+    margin: 2px 0 0;
+    font-size: 0.8rem;
+}
+
+.pip-body #pet progress {
+    width: 100%;
+}
+
+.pip-body #pet .pet-extras {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px 12px;
+    margin-top: 6px;
+    font-size: 0.8rem;
+}
+
+.pip-body #pet .pet-actions {
+    margin-top: 6px;
+}
+
+.pip-placeholder {
+    padding: 16px;
+}
+
+#pet-sprite {
+    display: block;
+    width: 120px;
+    height: 160px;
+    margin: 0 auto 12px;
+    border-radius: 10px;
+    object-fit: cover;
+}
+
 h2 {
     margin-top: 0;
     color: #354b83;
@@ -139,6 +233,11 @@ button.success {
 .task-notes,
 .history-meta {
     color: #646d7d;
+}
+
+.task-meta.overdue {
+    color: #b42318;
+    font-weight: bold;
     font-size: 0.92rem;
 }
 

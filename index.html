@@ -8,17 +8,47 @@
 
     <link rel="stylesheet" href="style.css">
 
+    <script src="storage.js" defer></script>
     <script src="tasks.js" defer></script>
     <script src="timer.js" defer></script>
     <script src="StudyStats.js" defer></script>
+    <script src="popup.js" defer></script>
+    <script src="pip.js" defer></script>
 </head>
 <body>
     <header class="page-header">
         <h1>Study Tracker</h1>
         <p>Plan your work. Track your progress.</p>
+        <button id="popOutButton" type="button" class="secondary">⧉ Pop out</button>
     </header>
 
     <main class="container">
+        <section class="card" id="pet">
+            <h2>My Pet</h2>
+            <img id="pet-sprite" src="pet.png" alt="Your StudyPet">
+            <p id="pet-mood">Happy</p>
+            <label for="hunger-bar">Hunger</label>
+            <progress id="hunger-bar" max="100" value="100"></progress>
+            <label for="happiness-bar">Happiness</label>
+            <progress id="happiness-bar" max="100" value="100"></progress>
+
+            <p class="pet-extras">
+                <span>🪙 Coins: <b id="coins">0</b></span>
+                <span>🍖 Food: <b id="food">0</b></span>
+                <span>🔥 Streak: <b id="streak">0</b> days</span>
+            </p>
+            <label for="exp-bar">⭐ Level <b id="level">0</b> — EXP <span id="exp-text"></span></label>
+            <progress id="exp-bar" max="100" value="0"></progress>
+
+            <div class="button-row pet-actions">
+                <button id="buy-food" type="button">
+                    Buy food (<span id="food-cost"></span> coins)
+                </button>
+                <button id="feed" type="button">Feed pet</button>
+            </div>
+            <p id="message" class="message" role="status"></p>
+        </section>
+
         <section class="card">
             <h2>Study Timer</h2>
 
@@ -69,6 +99,9 @@
                     maxlength="1000"
                     rows="3"
                 ></textarea>
+
+                <label for="taskDueDate">Due date (optional)</label>
+                <input id="taskDueDate" type="date">
 
                 <button type="submit">Add Task</button>
             </form>

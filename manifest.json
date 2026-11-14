@@ -1,0 +1,13 @@
+{
+  "manifest_version": 3,
+  "name": "StudyPet",
+  "version": "0.1.0",
+  "description": "A pet that thrives on your good studying habits.",
+  "permissions": ["storage"],
+  "action": {
+    "default_title": "StudyPet"
+  },
+  "background": {
+    "service_worker": "background.js"
+  }
+}

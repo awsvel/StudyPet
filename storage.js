@@ -2,7 +2,7 @@
 // StudyPet.addCoins / addExp instead of touching storage directly.
 const FOOD_COST = 10;
 const FOOD_HUNGER_RESTORE = 25;
-const HUNGER_DECAY_PER_HOUR = 5;
+const HUNGER_DECAY_PER_HOUR = 3000;
 const MAX_HUNGER = 100;
 const SESSION_BLOCK_MINUTES = 5;
 const COINS_PER_BLOCK = 5;
@@ -46,6 +46,14 @@ function getDaysBetweenDateKeys(from, to) {
   return Math.round((toTime - fromTime) / 86400000);
 }
 
+const SHOP_ITEMS = [
+  { id: "party-hat", name: "Party Hat", icon: "🎉", cost: 50 },
+  { id: "crown", name: "Crown", icon: "👑", cost: 150 },
+  { id: "sunglasses", name: "Sunglasses", icon: "😎", cost: 75 },
+  { id: "bow", name: "Bow", icon: "🎀", cost: 60 },
+  { id: "wizard-hat", name: "Wizard Hat", icon: "🧙", cost: 200 },
+];
+
 const DEFAULT_STATE = {
   coins: 0,
   food: 0,
@@ -55,7 +63,10 @@ const DEFAULT_STATE = {
   currentStreak: 0,
   longestStreak: 0,
   lastStudyDate: null,
+  equipped: null,
 };
+
+let pendingStateUpdate = Promise.resolve();
 
 const StudyPet = {
   async getState() {
@@ -73,11 +84,16 @@ const StudyPet = {
     return state;
   },
 
-  async update(fn) {
-    const state = await this.getState();
-    const result = fn(state);
-    await chrome.storage.local.set(state);
-    return result === undefined ? state : result;
+  update(fn) {
+    const run = async () => {
+      const state = await this.getState();
+      const result = fn(state);
+      await chrome.storage.local.set(state);
+      return result === undefined ? state : result;
+    };
+    const update = pendingStateUpdate.then(run, run);
+    pendingStateUpdate = update;
+    return update;
   },
 
   calculateHappiness(taskList) {
@@ -168,6 +184,32 @@ const StudyPet = {
       if (s.food < 1) return { ok: false, reason: "No food! Buy some first." };
       s.food -= 1;
       s.hunger = Math.min(MAX_HUNGER, s.hunger + FOOD_HUNGER_RESTORE);
+      return { ok: true };
+    });
+  },
+
+  buyItem(itemId) {
+    return this.update((s) => {
+      const item = SHOP_ITEMS.find((entry) => entry.id === itemId);
+      if (!item) return { ok: false, reason: "That item doesn't exist." };
+      s.inventory = s.inventory || [];
+      if (s.inventory.includes(itemId)) {
+        return { ok: false, reason: "You already own this!" };
+      }
+      if (s.coins < item.cost) return { ok: false, reason: "Not enough coins!" };
+      s.coins -= item.cost;
+      s.inventory.push(itemId);
+      s.equipped = itemId;
+      return { ok: true };
+    });
+  },
+
+  equipItem(itemId) {
+    return this.update((s) => {
+      if (itemId !== null && !(s.inventory || []).includes(itemId)) {
+        return { ok: false, reason: "You don't own that item." };
+      }
+      s.equipped = itemId;
       return { ok: true };
     });
   },

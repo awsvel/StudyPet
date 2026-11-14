@@ -45,6 +45,43 @@ body {
     background: #f4f6fb;
 }
 
+.pip-body [hidden] {
+    display: none !important;
+}
+
+.pip-body.pip-compact {
+    overflow: hidden;
+    background: #f4f6fb;
+}
+
+.pip-pet-button {
+    position: relative;
+    width: 100%;
+    height: 100vh;
+    padding: 0;
+    border-radius: 0;
+    background: transparent;
+}
+
+.pip-pet-button:hover:not(:disabled) {
+    background: transparent;
+}
+
+.pip-pet-button img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+.pip-pet-button[hidden] {
+    display: none;
+}
+
+#pipStatus:empty {
+    display: none;
+}
+
 .pip-body .page-header {
     padding: 8px 12px;
 }
@@ -84,11 +121,16 @@ body {
     display: none;
 }
 
-.pip-body #pet > #pet-sprite {
+.pip-body #pet > .pet-picture {
     grid-column: 1;
     grid-row: 1 / span 5;
     width: 84px;
     height: 108px;
+}
+
+.pip-body #pet > .pet-picture #pet-sprite {
+    width: 100%;
+    height: 100%;
 }
 
 .pip-body #pet > .pet-extras,
@@ -124,13 +166,47 @@ body {
     padding: 16px;
 }
 
-#pet-sprite {
-    display: block;
+.pet-picture {
+    position: relative;
     width: 120px;
     height: 160px;
     margin: 0 auto 12px;
+}
+
+#pet-sprite {
+    display: block;
+    width: 100%;
+    height: 100%;
     border-radius: 10px;
     object-fit: cover;
+}
+
+.pet-accessory {
+    position: absolute;
+    top: 4px;
+    right: 4px;
+    padding: 2px 6px;
+    border-radius: 6px;
+    background: white;
+    font-size: 1.4rem;
+    line-height: 1.2;
+}
+
+.shop-list {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.shop-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    margin-bottom: 10px;
+    padding: 12px 14px;
+    border: 1px solid #e0e4ed;
+    border-radius: 8px;
 }
 
 h2 {

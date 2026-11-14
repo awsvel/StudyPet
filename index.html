@@ -20,12 +20,16 @@
         <h1>Study Tracker</h1>
         <p>Plan your work. Track your progress.</p>
         <button id="popOutButton" type="button" class="secondary">⧉ Pop out</button>
+        <p id="pipStatus" role="status"></p>
     </header>
 
     <main class="container">
         <section class="card" id="pet">
             <h2>My Pet</h2>
-            <img id="pet-sprite" src="pet.png" alt="Your StudyPet">
+            <div class="pet-picture">
+                <img id="pet-sprite" src="pet.png" alt="Your StudyPet">
+                <span class="pet-accessory" hidden></span>
+            </div>
             <p id="pet-mood">Happy</p>
             <label for="hunger-bar">Hunger</label>
             <progress id="hunger-bar" max="100" value="100"></progress>
@@ -47,6 +51,12 @@
                 <button id="feed" type="button">Feed pet</button>
             </div>
             <p id="message" class="message" role="status"></p>
+        </section>
+
+        <section class="card" id="shop">
+            <h2>🛒 Shop</h2>
+            <ul id="shopList" class="shop-list"></ul>
+            <p id="shopMessage" class="message" role="status"></p>
         </section>
 
         <section class="card">

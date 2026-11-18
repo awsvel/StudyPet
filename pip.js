@@ -6,10 +6,9 @@
   const PET_HEIGHT = 270;
 
   const button = document.getElementById("popOutButton");
-  const petCard = document.getElementById("pet");
   const petImage = document.getElementById("pet-sprite");
   const status = document.getElementById("pipStatus");
-  if (!button || !petCard || !petImage || !status) return;
+  if (!button || !petImage || !status) return;
 
   if (!("documentPictureInPicture" in window)) {
     button.disabled = true;
@@ -23,7 +22,7 @@
   let petButton = null;
 
   function setButtonState(isOut) {
-    button.textContent = isOut ? "⧉ Pop in (pet only)" : "⧉ Pop out";
+    button.textContent = isOut ? "⧉ Pop in" : "⧉ Pop out";
   }
 
   function setCompact(isCompact) {
@@ -88,8 +87,7 @@
     const image = win.document.createElement("img");
     image.src = petImageUrl;
     image.alt = "";
-    const accessory = petCard.querySelector(".pet-accessory").cloneNode(true);
-    petButton.append(image, accessory);
+    petButton.append(image);
     petButton.addEventListener("click", () => setCompact(false));
     win.document.body.append(petButton);
     document.body.prepend(placeholder);

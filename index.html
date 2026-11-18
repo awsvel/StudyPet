@@ -25,10 +25,19 @@
 
     <main class="container">
         <section class="card" id="pet">
-            <h2>My Pet</h2>
+            <h2>
+                My <span id="pet-name">Pet</span>
+                <button id="edit-pet-name" class="pet-name-edit secondary" type="button"
+                    aria-label="Edit pet name" title="Edit pet name">✎</button>
+            </h2>
+            <form id="pet-name-form" class="pet-name-form" hidden>
+                <input id="pet-name-input" type="text" maxlength="24"
+                    placeholder="Give your pet a name" aria-label="Pet name" required>
+                <button type="submit">Save</button>
+                <button id="cancel-pet-name" class="secondary" type="button">Cancel</button>
+            </form>
             <div class="pet-picture">
-                <img id="pet-sprite" src="pet.png" alt="Your StudyPet">
-                <span class="pet-accessory" hidden></span>
+                <img id="pet-sprite" src="assets/pet.png" alt="Your StudyPet">
             </div>
             <p id="pet-mood">Happy</p>
             <label for="hunger-bar">Hunger</label>

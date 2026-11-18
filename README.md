@@ -9,6 +9,27 @@ A Chrome study tracker with a virtual pet. No build step or account is required.
    `manifest.json`.
 3. Pin StudyPet from Chrome's Extensions menu, then click its toolbar icon.
 
+## Project Structure
+
+The repository contains the following files and folders:
+
+```text
+StudyPet/
+├── assets/         
+├── README.md        
+├── StudyStats.js   
+├── background.js   
+├── index.html      
+├── manifest.json   
+├── pip.js          
+├── popup.html      
+├── popup.js       
+├── storage.js      
+├── style.css       
+├── tasks.js        
+└── timer.js         
+```
+
 ## Pet and shop
 
 - Rename the pet with the pencil beside its name.

@@ -1,24 +1,58 @@
 # StudyPet
-GWC Beginner project #1!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
-Load this folder as an unpacked Chrome extension (make sure you are in developer mode). Click the StudyPet toolbar
-icon to open its launcher, then choose "Pop out" for an always-on-top floating
-window that stays open while navigating between pages. Choose "Pop in (pet only)" to
-show only the pet; click the pet to reopen the full floating window. Drag the
-floating window by its browser frame, and close it to return to the launcher.
-Keep the minimized launcher open while Picture-in-Picture is active.
+A Chrome study tracker with a virtual pet. No build step or account is required.
 
-After updating the extension, close both StudyPet windows, reload StudyPet on
-`chrome://extensions`, and open it again from the toolbar. Previously opened
-windows can continue running the old code.
+## Install and open
 
-Chrome controls the floating window's frame and sizing. An extension cannot
-remove its window controls, make the window transparent around the image, or
-drag the window by the image itself. Chrome may also limit window resizing.
+1. Go to `chrome://extensions` and enable **Developer mode**.
+2. Select **Load unpacked** and choose the project folder containing
+   `manifest.json`.
+3. Pin StudyPet from Chrome's Extensions menu, then click its toolbar icon.
 
-Earn coins through study sessions and completed tasks, then visit the shop to
-buy accessories. Purchases are equipped automatically; owned items can be
-equipped or unequipped later. The equipped item appears as a badge on the pet.
+## Pet and shop
 
-For the demo, hunger drops from full to empty in two minutes, including time
-spent away from the app. Each food item restores 25 hunger points.
+- Rename the pet with the pencil beside its name.
+- Hunger drops from full to empty in about two minutes, even while the app is
+  closed. At 30% or below, the hungry sprite appears. Food costs 10 coins and
+  restores 25 hunger.
+- Overdue, incomplete tasks reduce happiness by 10 points per overdue day.
+- Buy accessories in the shop; purchases equip automatically. Only one item can
+  be equipped at a time.
+
+| Accessory | Cost |
+| --- | ---: |
+| Party Hat | 50 coins |
+| Crown | 150 coins |
+| Sunglasses | 75 coins |
+| Bow | 60 coins |
+| Wizard Hat | 200 coins |
+
+## Tasks, timer, and rewards
+
+Add a task with a class and name; notes and due date are optional. Mark tasks
+complete, undo completion, or delete them. Active tasks are available in the
+timer.
+
+Select an active task and press **Start** to study. **Pause**/**Resume** controls
+the timer; **Reset** clears it without saving. **Finish Session** saves the
+session.
+
+- Each completed 5-minute session block earns 5 coins and 10 EXP. Partial
+  blocks earn no session rewards.
+- Completing a task earns 50 coins and 100 EXP once. Early completion adds a
+  bonus: 10 coins/20 EXP at least 1 day early, 25/50 at least 3 days early, or
+  50/100 at least 7 days early.
+- Study Session History lists saved sessions. Study Statistics shows time and
+  session counts for today and this week, plus time by class.
+
+## Floating window and data
+
+Select **Pop out** to open the floating PiP window; the original app window is
+minimized and must stay open. **Pop in** toggles the full app and pet-only view;
+click the pet to return to the full view. Closing PiP restores the app window.
+Chrome controls the window frame and resizing.
+
+Pet state is saved in Chrome extension storage; tasks and sessions use browser
+local storage. After updating the extension, close StudyPet windows, select
+**Reload** at `chrome://extensions`, then reopen it. The toolbar icon uses
+`assets/icon.png`.

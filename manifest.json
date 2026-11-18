@@ -5,7 +5,8 @@
   "description": "A pet that thrives on your good studying habits.",
   "permissions": ["storage"],
   "action": {
-    "default_title": "StudyPet"
+    "default_title": "StudyPet",
+    "default_icon": "assets/icon.png"
   },
   "background": {
     "service_worker": "background.js"

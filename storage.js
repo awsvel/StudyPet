@@ -47,17 +47,18 @@ function getDaysBetweenDateKeys(from, to) {
 }
 
 const SHOP_ITEMS = [
-  { id: "party-hat", name: "Party Hat", icon: "🎉", cost: 50 },
-  { id: "crown", name: "Crown", icon: "👑", cost: 150 },
-  { id: "sunglasses", name: "Sunglasses", icon: "😎", cost: 75 },
-  { id: "bow", name: "Bow", icon: "🎀", cost: 60 },
-  { id: "wizard-hat", name: "Wizard Hat", icon: "🧙", cost: 200 },
+  { id: "party-hat", name: "Party Hat", icon: "🎉", cost: 50, sprite: "partyhat" },
+  { id: "crown", name: "Crown", icon: "👑", cost: 150, sprite: "crown" },
+  { id: "sunglasses", name: "Sunglasses", icon: "😎", cost: 75, sprite: "sunglasses" },
+  { id: "bow", name: "Bow", icon: "🎀", cost: 60, sprite: "bow" },
+  { id: "wizard-hat", name: "Wizard Hat", icon: "🧙", cost: 200, sprite: "wizard" },
 ];
 
 const DEFAULT_STATE = {
   coins: 0,
   food: 0,
   exp: 0,
+  petName: "Pet",
   hunger: MAX_HUNGER,
   lastHungerUpdate: Date.now(),
   currentStreak: 0,
